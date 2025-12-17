@@ -2,14 +2,15 @@ import "./style.css";
 
 interface Reserva {
   tipoHabitacion: "standard" | "suite";
+  desayuno: boolean;
   pax: number;
   noches: number;
 }
 
 const reservas : Reserva[] = [
-  { tipoHabitacion: "standard", pax: 1, noches: 3 },
-  { tipoHabitacion: "standard", pax: 1, noches: 4 },
-  { tipoHabitacion: "suite", pax: 2, noches: 1 },
+  { tipoHabitacion: "standard", desayuno: false, pax: 1, noches: 3 },
+  { tipoHabitacion: "standard", desayuno: false, pax: 1, noches: 4 },
+  { tipoHabitacion: "suite", desayuno: true, pax: 2, noches: 1 },
 ];
 
 const contenedorSubtotales = document.getElementById("subtotales")
@@ -40,6 +41,10 @@ class CalcularPrecio {
 
       if (el.pax > 1) {
         subtotalReserva += 40*(el.pax -1);
+      }
+
+      if (el.desayuno) {
+        subtotalReserva += (el.pax * 15)
       }
 
       subtotalReserva *= el.noches;
@@ -80,6 +85,10 @@ class CalcularPrecioTour extends CalcularPrecio {
 
       if (el.pax > 1) {
         subtotal += 40*(el.pax - 1);
+      }
+
+      if (el.desayuno) {
+        subtotal += (el.pax * 15)
       }
       
       subtotal *= el.noches;
