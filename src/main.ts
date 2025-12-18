@@ -53,7 +53,6 @@ class CalcularPrecio {
 
       const p = document.createElement("p");
       p.textContent = `Reserva ${index +1}: ${subtotalReserva} euros sin IVA`;
-
       contenedorSubtotales?.appendChild(p);
     });
   }
@@ -81,25 +80,25 @@ class CalcularPrecioTour extends CalcularPrecio {
     this.subtotales = [];
 
     this.reservas.forEach((el, index) => {
-      let subtotal = 100;
+      let precioBase = 100 * el.noches
+      let extras = 0;
 
       if (el.pax > 1) {
-        subtotal += 40*(el.pax - 1);
+        extras += 40 * (el.pax -1) * el.noches;
       }
 
       if (el.desayuno) {
-        subtotal += (el.pax * 15)
+        extras += 15 * el.pax * el.noches;
       }
-      
-      subtotal *= el.noches;
-      
-      subtotal *= (1 - this.descuento);
-      
-      this.subtotales.push(subtotal)
+
+      extras *= (1 - this.descuento);
+
+      const subtotal = precioBase + extras;
+
+      this.subtotales.push(subtotal) 
 
       const p = document.createElement("p");
       p.textContent = `Reserva Tour Operador ${index +1}: ${subtotal} euros sin IVA`;
-
       contenedorSubtotalesTour?.appendChild(p);
     });
   }
