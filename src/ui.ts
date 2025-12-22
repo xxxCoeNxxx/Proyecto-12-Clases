@@ -19,3 +19,31 @@ export const pintarLineaReserva = (
 
   contenedor.appendChild(p);
 };
+
+export const obtenerYPintarParticular = (
+  index:number, 
+  subtotal:number, 
+  ivaAplicado:number, 
+  totalConIVA:number
+): void => {
+  const contPart = document.getElementById("reservasParticular");
+    if (contPart !== null && contPart !== undefined && contPart instanceof HTMLElement) {
+      pintarLineaReserva( contPart, index, subtotal, ivaAplicado, totalConIVA );
+    } else {
+      throw new Error("Contenedor Particular no encontrado o tipo incorrecto");
+    }
+}
+
+export const obtenerYPintarTour = (
+  index:number,
+  subtotal: number,
+  ivaAplicadoTour: number,
+  totalTourConIVA: number
+): void => {
+  const contTour = document.getElementById("reservasTour")
+    if ( contTour !== null && contTour !== undefined && contTour instanceof HTMLElement) {
+      pintarLineaReserva( contTour, index, subtotal, ivaAplicadoTour, totalTourConIVA, "Reserva Tour Operador" );
+    } else {
+      throw new Error("Contenedor Tour no encontrado o tipo incorrecto");
+    }
+}

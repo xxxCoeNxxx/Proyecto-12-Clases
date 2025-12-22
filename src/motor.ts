@@ -1,4 +1,4 @@
-import { pintarLineaReserva } from "./ui";
+import { obtenerYPintarParticular, obtenerYPintarTour } from "./ui";
 import { Reserva } from "./model";
 
 export class CalcularPrecio {
@@ -42,12 +42,7 @@ export class CalcularPrecio {
 
       const ivaAplicado = totalConIVA - subtotal;
 
-      const contPart = document.getElementById("reservasParticular");
-      if (contPart !== null && contPart !== undefined && contPart instanceof HTMLElement) {
-        pintarLineaReserva( contPart, index, subtotal, ivaAplicado, totalConIVA );
-      } else {
-        throw new Error("Contenedor Particular no encontrado o tipo incorrecto");
-      }
+      obtenerYPintarParticular(index, subtotal, ivaAplicado, totalConIVA);
     });
   }
 };
@@ -87,12 +82,7 @@ export class CalcularPrecioTour extends CalcularPrecio {
 
       const ivaAplicadoTour = totalTourConIVA - subtotal;
 
-      const contTour = document.getElementById("reservasTour")
-      if ( contTour !== null && contTour !== undefined && contTour instanceof HTMLElement) {
-        pintarLineaReserva( contTour, index, subtotal, ivaAplicadoTour, totalTourConIVA, "Reserva Tour Operador" );
-      } else {
-        throw new Error("Contenedor Tour no encontrado o tipo incorrecto");
-      }
+      obtenerYPintarTour(index, subtotal, ivaAplicadoTour, totalTourConIVA)
     });
   }
 }
